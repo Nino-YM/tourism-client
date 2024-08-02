@@ -66,10 +66,11 @@ export const deleteUser = (id) => api.delete(`/users/${id}`);
 
 // Article endpoints
 export const getArticles = () => api.get('/articles');
-export const getArticle = (id) => api.get(`/articles/${id}`);
 export const createArticle = (data) => api.post('/articles', data);
+export const getArticle = (id) => api.get(`/articles/${id}`);
 export const updateArticle = (id, data) => api.put(`/articles/${id}`, data);
 export const deleteArticle = (id) => api.delete(`/articles/${id}`);
+
 
 // Event endpoints
 export const getEvents = () => api.get('/events');

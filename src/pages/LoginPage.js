@@ -21,13 +21,12 @@ function LoginPage() {
         e.preventDefault();
         try {
             const response = await apiLogin(formData);
-            console.log('Login response:', response); // Debug log
-            const { access_token, user } = response.data; // Ensure this matches your API response
+            console.log('Login response:', response);
+            const { access_token, user } = response.data;
             login(access_token, user);
             alert('Login successful');
         } catch (error) {
-            alert('Error logging in');
-            console.error('Login error:', error); // Debug log
+            console.error('Login error:', error);
         }
     };
 
