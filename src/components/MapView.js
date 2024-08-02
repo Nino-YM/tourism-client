@@ -20,20 +20,22 @@ const MapView = ({ events = [] }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {events.length > 0 && events.map(event => (
-                <Marker
-                    key={event.id_event}
-                    position={[
-                        event.latitude || defaultPosition[0],
-                        event.longitude || defaultPosition[1]
-                    ]}
-                >
-                    <Popup>
-                        <strong>{event.event_name}</strong><br />
-                        {event.event_description}<br />
-                        From: {new Date(event.start_date).toLocaleDateString()}<br />
-                        To: {new Date(event.end_date).toLocaleDateString()}
-                    </Popup>
-                </Marker>
+                event.location && (
+                    <Marker
+                        key={event.id_event}
+                        position={[
+                            event.location.latitude || defaultPosition[0],
+                            event.location.longitude || defaultPosition[1]
+                        ]}
+                    >
+                        <Popup>
+                            <strong>{event.event_name}</strong><br />
+                            {event.event_description}<br />
+                            From: {new Date(event.start_date).toLocaleDateString()}<br />
+                            To: {new Date(event.end_date).toLocaleDateString()}
+                        </Popup>
+                    </Marker>
+                )
             ))}
         </MapContainer>
     );

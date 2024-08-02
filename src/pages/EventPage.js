@@ -128,7 +128,10 @@ const EventPage = () => {
                 const eventResponse = await createEvent(eventPayload);
                 console.log('Event Response:', eventResponse);
 
-                setEvents([...events, eventResponse]);
+                // Fetch the updated list of events
+                const updatedEvents = await getEvents();
+                setEvents(updatedEvents.data);
+
                 setNewEvent({
                     event_name: '',
                     event_description: '',
@@ -271,4 +274,3 @@ const EventPage = () => {
 };
 
 export default EventPage;
-
