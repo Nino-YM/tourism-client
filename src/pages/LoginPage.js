@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../api/axios';
+import { login } from '../api/axios';
 
 function LoginPage() {
     const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/login', formData);
+            const response = await login(formData);
             localStorage.setItem('token', response.data.access_token);
             alert('Login successful');
         } catch (error) {
