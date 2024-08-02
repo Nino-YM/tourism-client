@@ -24,7 +24,7 @@ function RegisterPage() {
         e.preventDefault();
         try {
             const response = await axios.post('/register', formData);
-            login(response.data.access_token);  // Use the login function from AuthContext
+            login(response.data.access_token);
             alert('Registration successful');
         } catch (error) {
             alert('Error registering');

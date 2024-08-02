@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { login as apiLogin } from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 function LoginPage() {
     const [formData, setFormData] = useState({
@@ -29,35 +29,39 @@ function LoginPage() {
     };
 
     return (
-        <Container>
-            <h2 className="mt-4">Login</h2>
-            <Form onSubmit={handleSubmit} className="mt-4">
-                <Form.Group controlId="formEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        name="email"
-                        placeholder="Enter email"
-                        onChange={handleChange}
-                        required
-                    />
-                </Form.Group>
+        <Container className="mt-5">
+            <Row className="justify-content-md-center">
+                <Col md="6">
+                    <h2 className="text-center mb-4">Login</h2>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group controlId="formEmail" className="mb-3">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                onChange={handleChange}
+                                required
+                            />
+                        </Form.Group>
 
-                <Form.Group controlId="formPassword" className="mt-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        name="password"
-                        placeholder="Enter password"
-                        onChange={handleChange}
-                        required
-                    />
-                </Form.Group>
+                        <Form.Group controlId="formPassword" className="mb-3">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                name="password"
+                                placeholder="Enter password"
+                                onChange={handleChange}
+                                required
+                            />
+                        </Form.Group>
 
-                <Button variant="primary" type="submit" className="mt-4">
-                    Login
-                </Button>
-            </Form>
+                        <Button variant="primary" type="submit" className="w-100">
+                            Login
+                        </Button>
+                    </Form>
+                </Col>
+            </Row>
         </Container>
     );
 }
