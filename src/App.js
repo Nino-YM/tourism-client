@@ -11,24 +11,27 @@ import ReviewPage from './pages/ReviewPage';
 import CommentPage from './pages/CommentPage';
 import NavigationBar from './components/Navbar';
 import './App.css';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <NavigationBar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/articles" element={<ArticlePage />} />
-          <Route path="/events" element={<EventPage />} />
-          <Route path="/reviews" element={<ReviewPage />} />
-          <Route path="/comments" element={<CommentPage />} />
-          <Route path="/users" element={<UserPage />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <div className="App">
+          <NavigationBar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/articles" element={<ArticlePage />} />
+            <Route path="/events" element={<EventPage />} />
+            <Route path="/reviews" element={<ReviewPage />} />
+            <Route path="/comments" element={<CommentPage />} />
+            <Route path="/users" element={<UserPage />} />
+          </Routes>
+        </div>
+      </AuthProvider>
     </Router>
   );
 }
