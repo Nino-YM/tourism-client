@@ -128,7 +128,6 @@ const EventPage = () => {
                 const eventResponse = await createEvent(eventPayload);
                 console.log('Event Response:', eventResponse);
 
-                // Fetch the updated list of events
                 const updatedEvents = await getEvents();
                 setEvents(updatedEvents.data);
 

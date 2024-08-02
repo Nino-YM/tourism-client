@@ -21,7 +21,7 @@ api.interceptors.request.use(
 );
 
 export const getUserProfile = async () => {
-    const userId = localStorage.getItem('user_id'); // Assuming the user ID is stored in local storage
+    const userId = localStorage.getItem('user_id');
     if (!userId) {
         throw new Error('User ID not found in local storage');
     }
@@ -47,9 +47,9 @@ export const createLocation = async (data) => {
 export const login = async (data) => {
     try {
         const response = await api.post('/login', data);
-        const { access_token, user } = response.data; // Destructure correctly
+        const { access_token, user } = response.data;
         localStorage.setItem('token', access_token);
-        localStorage.setItem('user_id', user.id_user); // Assuming user object has id_user
+        localStorage.setItem('user_id', user.id_user);
         return response.data;
     } catch (error) {
         throw error;
