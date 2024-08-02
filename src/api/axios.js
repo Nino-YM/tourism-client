@@ -13,14 +13,48 @@ api.interceptors.request.use(
         const token = localStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
+            console.log('Adding token to request headers:', token);
         }
         return config;
     },
     (error) => Promise.reject(error)
 );
 
+export const getUserProfile = async () => {
+    const userId = localStorage.getItem('user_id'); // Assuming the user ID is stored in local storage
+    if (!userId) {
+        throw new Error('User ID not found in local storage');
+    }
+
+    try {
+        const response = await api.get(`/users/${userId}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const createLocation = async (data) => {
+    try {
+        const response = await api.post('/locations', data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 // Auth endpoints
-export const login = (data) => api.post('/login', data);
+export const login = async (data) => {
+    try {
+        const response = await api.post('/login', data);
+        const { access_token, user } = response.data; // Destructure correctly
+        localStorage.setItem('token', access_token);
+        localStorage.setItem('user_id', user.id_user); // Assuming user object has id_user
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 export const register = (data) => api.post('/register', data);
 export const logout = () => api.post('/logout');
 
@@ -47,7 +81,6 @@ export const deleteEvent = (id) => api.delete(`/events/${id}`);
 // Location endpoints
 export const getLocations = () => api.get('/locations');
 export const getLocation = (id) => api.get(`/locations/${id}`);
-export const createLocation = (data) => api.post('/locations', data);
 export const updateLocation = (id, data) => api.put(`/locations/${id}`, data);
 export const deleteLocation = (id) => api.delete(`/locations/${id}`);
 

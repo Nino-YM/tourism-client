@@ -10,20 +10,31 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-const MapView = () => {
-    const position = [47.478419, -0.563165];
+const MapView = ({ events = [] }) => {
+    const defaultPosition = [47.478419, -0.563165]; // Coordinates for Angers, France
 
     return (
-        <MapContainer center={position} zoom={13} className="map-container">
+        <MapContainer center={defaultPosition} zoom={13} className="map-container">
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={position}>
-                <Popup>
-                    Angers City Center
-                </Popup>
-            </Marker>
+            {events.length > 0 && events.map(event => (
+                <Marker
+                    key={event.id_event}
+                    position={[
+                        event.latitude || defaultPosition[0],
+                        event.longitude || defaultPosition[1]
+                    ]}
+                >
+                    <Popup>
+                        <strong>{event.event_name}</strong><br />
+                        {event.event_description}<br />
+                        From: {new Date(event.start_date).toLocaleDateString()}<br />
+                        To: {new Date(event.end_date).toLocaleDateString()}
+                    </Popup>
+                </Marker>
+            ))}
         </MapContainer>
     );
 };
